@@ -1,0 +1,37 @@
+{
+  "Linear Regression": {
+    "MAE": 1.2673,
+    "RMSE": 1.6311,
+    "R2": 0.4464,
+    "MAPE": 26.83,
+    "resid_std": 1.6311
+  },
+  "Decision Tree": {
+    "MAE": 1.2081,
+    "RMSE": 1.5626,
+    "R2": 0.4919,
+    "MAPE": 25.97,
+    "resid_std": 1.5625
+  },
+  "Random Forest": {
+    "MAE": 1.1199,
+    "RMSE": 1.4516,
+    "R2": 0.5615,
+    "MAPE": 23.93,
+    "resid_std": 1.4516
+  },
+  "XGBoost": {
+    "MAE": 1.0088,
+    "RMSE": 1.3177,
+    "R2": 0.6387,
+    "MAPE": 20.96,
+    "resid_std": 1.3177
+  },
+  "LightGBM": {
+    "MAE": 0.9746,
+    "RMSE": 1.3008,
+    "R2": 0.6479,
+    "MAPE": 20.08,
+    "resid_std": 1.3007
+  }
+}

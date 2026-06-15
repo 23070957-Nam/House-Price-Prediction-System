@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnam House Price Prediction System</title>
+  <meta name="description"
+    content="Hệ thống dự đoán giá nhà thông minh tại Việt Nam sử dụng Machine Learning & Explainable AI. Dự đoán chính xác giá bất động sản dựa trên 9 đặc trưng quan trọng." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css?v=20260615b" />
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🏠</div>
+      <div class="brand-text">
+        <div class="brand-title">HouseAI</div>
+        <div class="brand-sub">Vietnam</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item active" id="nav-home" onclick="showPage('home')">
+        <span class="nav-icon">🏡</span>
+        <span class="nav-label">Trang Chủ</span>
+      </a>
+      <a class="nav-item" id="nav-prediction" onclick="showPage('prediction')">
+        <span class="nav-icon">🔮</span>
+        <span class="nav-label">Dự Đoán Giá</span>
+      </a>
+      <a class="nav-item" id="nav-eda" onclick="showPage('eda')">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Phân Tích EDA</span>
+      </a>
+      <a class="nav-item" id="nav-comparison" onclick="showPage('comparison')">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">So Sánh Model</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-badge">🏆 AI/ML Project 2026</div>
+    </div>
+  </aside>
+
+  <!-- Mobile header -->
+  <header class="mobile-header">
+    <button class="menu-btn" id="menuBtn" onclick="toggleSidebar()">☰</button>
+    <span class="mobile-title">🏠 HouseAI Vietnam</span>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ═══════════════ HOME PAGE ═══════════════ -->
+    <div id="page-home" class="page active">
+      <div class="hero-section">
+        <div class="hero-badge animate-fade-up">🏆 AI/ML University Project 2024</div>
+        <h1 class="hero-title animate-fade-up delay-1">
+          Vietnam House Price<br>
+          <span class="hero-accent">Prediction System</span>
+        </h1>
+        <p class="hero-subtitle animate-fade-up delay-2">
+          Hệ thống dự đoán giá nhà thông minh sử dụng Machine Learning &amp; Explainable AI.<br>
+          Dự đoán chính xác giá bất động sản tại Việt Nam dựa trên 9 đặc trưng quan trọng.
+        </p>
+        <div class="hero-tags animate-fade-up delay-3">
+          <span class="tag">🤖 5 Thuật toán ML</span>
+          <span class="tag">📊 Phân tích SHAP</span>
+          <span class="tag">📈 EDA Tương tác</span>
+          <span class="tag">🏡 34 Tỉnh/Thành</span>
+        </div>
+        <button class="hero-cta animate-fade-up delay-4" onclick="showPage('prediction')">
+          🔮 Dự Đoán Ngay →
+        </button>
+      </div>
+
+      <!-- KPI Stats -->
+      <section class="section">
+        <h2 class="section-title">📊 Thống Kê Hệ Thống</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card animate-count" data-target="30000" data-suffix="+">
+            <div class="kpi-icon">🏘️</div>
+            <div class="kpi-value" id="kpi-1">0</div>
+            <div class="kpi-label">Bất động sản trong dataset</div>
+          </div>
+          <div class="kpi-card animate-count" data-target="5" data-suffix="">
+            <div class="kpi-icon">🤖</div>
+            <div class="kpi-value" id="kpi-2">0</div>
+            <div class="kpi-label">Thuật toán ML</div>
+          </div>
+          <div class="kpi-card animate-count" data-target="34" data-suffix="">
+            <div class="kpi-icon">🗺️</div>
+            <div class="kpi-value" id="kpi-3">0</div>
+            <div class="kpi-label">Tỉnh / Thành phố</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🎯</div>
+            <div class="kpi-value" id="kpi-r2">~65%</div>
+            <div class="kpi-label">Độ chính xác (R²)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Algorithm Cards -->
+      <section class="section">
+        <h2 class="section-title">🧠 Các Thuật Toán ML</h2>
+        <div class="algo-grid">
+          <div class="algo-card" style="--accent:#3b82f6">
+            <div class="algo-icon">📏</div>
+            <div class="algo-name">Linear Regression</div>
+            <div class="algo-desc">Mô hình tuyến tính cơ bản. Nhanh, dễ hiểu, phù hợp làm baseline.</div>
+          </div>
+          <div class="algo-card" style="--accent:#10b981">
+            <div class="algo-icon">🌳</div>
+            <div class="algo-name">Decision Tree</div>
+            <div class="algo-desc">Cây quyết định phân chia dữ liệu theo từng nút. Dễ trực quan hoá.</div>
+          </div>
+          <div class="algo-card" style="--accent:#6366f1">
+            <div class="algo-icon">🌲</div>
+            <div class="algo-name">Random Forest</div>
+            <div class="algo-desc">Ensemble của nhiều cây quyết định. Mạnh mẽ và ổn định.</div>
+          </div>
+          <div class="algo-card" style="--accent:#f59e0b">
+            <div class="algo-icon">⚡</div>
+            <div class="algo-name">XGBoost</div>
+            <div class="algo-desc">Gradient boosting hiệu suất cao. Thắng nhiều cuộc thi Kaggle.</div>
+          </div>
+          <div class="algo-card" style="--accent:#ec4899">
+            <div class="algo-icon">💡</div>
+            <div class="algo-name">LightGBM</div>
+            <div class="algo-desc">Gradient boosting siêu nhanh, tiêu thụ bộ nhớ thấp.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it Works -->
+      <section class="section">
+        <h2 class="section-title">⚙️ Quy Trình Hoạt Động</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-title">📝 Nhập Thông Tin</div>
+            <div class="step-desc">Điền thông tin bất động sản: diện tích, vị trí, pháp lý, nội thất…</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-title">🔧 Tiền Xử Lý</div>
+            <div class="step-desc">Hệ thống mã hoá và chuẩn hoá dữ liệu đầu vào tự động.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-title">🤖 Chọn Mô Hình</div>
+            <div class="step-desc">Lựa chọn thuật toán ML phù hợp từ 5 mô hình có sẵn.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-title">📊 Dự Đoán Giá</div>
+            <div class="step-desc">Model đưa ra giá dự đoán kèm khoảng tin cậy 90%.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-title">🔍 Giải Thích AI</div>
+            <div class="step-desc">SHAP phân tích yếu tố ảnh hưởng đến kết quả dự đoán.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section class="section">
+        <h2 class="section-title">✨ Tính Năng Nổi Bật</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>🎯 Dự Đoán Chính Xác</h3>
+            <ul>
+              <li>Sử dụng 5 thuật toán Machine Learning tiên tiến</li>
+              <li>Khoảng tin cậy 90% cho mỗi dự đoán</li>
+              <li>Dữ liệu thực tế từ thị trường bất động sản VN</li>
+              <li>Tự động cập nhật và tái huấn luyện model</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>🔍 Giải Thích Minh Bạch</h3>
+            <ul>
+              <li>SHAP Values — giải thích từng yếu tố ảnh hưởng</li>
+              <li>Feature Importance Chart trực quan</li>
+              <li>Waterfall Plot cho từng dự đoán cụ thể</li>
+              <li>Insights bằng ngôn ngữ tự nhiên</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="cta-box">
+        <h3>🚀 Bắt Đầu Ngay</h3>
+        <p>Chọn <strong>🔮 Dự Đoán Giá</strong> trong menu bên trái để bắt đầu dự đoán giá bất động sản của bạn!</p>
+        <button class="btn-primary" onclick="showPage('prediction')">Bắt Đầu Dự Đoán →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════ PREDICTION PAGE ═══════════════ -->
+    <div id="page-prediction" class="page">
+      <h1 class="page-title">🏠 Dự Đoán Giá Nhà</h1>
+      <p class="page-subtitle">Nhập thông tin bất động sản và chọn thuật toán để nhận kết quả dự đoán.</p>
+
+      <!-- Quick-fill samples -->
+      <div class="section-label">⚡ Điền nhanh mẫu có sẵn</div>
+      <div class="sample-buttons" id="sampleButtons">
+        <button class="sample-btn" onclick="fillSample('hcm')">🏙️ Căn hộ P. Bến Thành, HCM</button>
+        <button class="sample-btn" onclick="fillSample('hn')">🏘️ Nhà phố P. Hà Đông, HN</button>
+        <button class="sample-btn" onclick="fillSample('nhatrang')">🏖️ Biệt thự P. Nha Trang</button>
+        <button class="sample-btn" onclick="fillSample('tayninh')">🏠 Nhà cấp 4 P. Tân An, Tây Ninh</button>
+      </div>
+
+      <div class="prediction-layout">
+        <!-- Left: Form -->
+        <div class="form-area">
+          <div class="form-card">
+            <h3>🏗️ Thông Tin Vật Lý</h3>
+
+            <label class="form-label">
+              📐 Diện tích (m²): <span class="slider-val" id="areaVal">80</span> m²
+            </label>
+            <div class="slider-container">
+              <input type="range" id="areaSlider" min="20" max="500" value="80" step="5"
+                oninput="updateSlider('area')" />
+              <div class="slider-marks">
+                <span>20</span><span>150</span><span>300</span><span>500</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">🛏️ Số phòng ngủ</label>
+                <div class="number-input">
+                  <button onclick="changeNum('bedrooms',-1)">−</button>
+                  <input type="number" id="bedrooms" value="3" min="1" max="10" readonly />
+                  <button onclick="changeNum('bedrooms',1)">+</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">🚿 Số phòng tắm</label>
+                <div class="number-input">
+                  <button onclick="changeNum('bathrooms',-1)">−</button>
+                  <input type="number" id="bathrooms" value="2" min="1" max="10" readonly />
+                  <button onclick="changeNum('bathrooms',1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">🏗️ Số tầng</label>
+              <div class="number-input">
+                <button onclick="changeNum('floors',-1)">−</button>
+                <input type="number" id="floors" value="2" min="1" max="10" readonly />
+                <button onclick="changeNum('floors',1)">+</button>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">📏 Mặt tiền (m)</label>
+                <input type="number" id="frontage" class="form-number" value="4" min="1" max="50" step="0.5"
+                  oninput="updateSummary()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">🛣️ Đường vào (m)</label>
+                <input type="number" id="accessRoad" class="form-number" value="3" min="1" max="50" step="0.5"
+                  oninput="updateSummary()" />
+              </div>
+            </div>
+
+            <h3 style="margin-top:1.5rem">📍 Vị Trí</h3>
+            <div class="form-group">
+              <label class="form-label">🗺️ Tỉnh / Thành phố</label>
+              <select id="province" onchange="onProvinceChange()" class="form-select"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">🏙️ Quận / Huyện <span style="opacity:.7;font-weight:400">(dùng để định giá)</span></label>
+              <select id="districtOld" onchange="updateSummary()" class="form-select"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">📍 Phường / Xã <span style="opacity:.7;font-weight:400">(đơn vị 2025 · không dùng định giá)</span></label>
+              <select id="district" onchange="updateSummary()" class="form-select"></select>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3>📋 Thông Tin Khác</h3>
+            <div class="form-group">
+              <label class="form-label">📄 Tình trạng pháp lý</label>
+              <select id="legal" class="form-select">
+                <option value="1.15">Sổ đỏ (Red Book)</option>
+                <option value="1.10">Sổ hồng (Pink Book)</option>
+                <option value="1.0">Giấy tờ hợp lệ</option>
+                <option value="0.90">Đang chờ cấp sổ</option>
+                <option value="0.80">Chưa có sổ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">🛋️ Tình trạng nội thất</label>
+              <select id="furniture" class="form-select">
+                <option value="1.20">Nội thất cao cấp</option>
+                <option value="1.10" selected>Nội thất đầy đủ</option>
+                <option value="1.0">Nội thất cơ bản</option>
+                <option value="0.90">Không nội thất</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">🧭 Hướng nhà</label>
+              <select id="direction" class="form-select">
+                <option value="1.08">Đông Nam</option>
+                <option value="1.06">Nam</option>
+                <option value="1.04">Đông</option>
+                <option value="1.02">Tây Nam</option>
+                <option value="1.0">Bắc</option>
+                <option value="0.98">Tây</option>
+                <option value="1.02">Đông Bắc</option>
+                <option value="0.97">Tây Bắc</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Algorithm + Summary + Button -->
+        <div class="right-area">
+          <div class="algo-select-card">
+            <h3>🤖 Chọn Thuật Toán</h3>
+            <div class="model-tabs" id="modelTabs">
+              <button class="model-tab" onclick="selectModel('Linear Regression')" data-model="Linear Regression">📏
+                Linear</button>
+              <button class="model-tab" onclick="selectModel('Decision Tree')" data-model="Decision Tree">🌳
+                D.Tree</button>
+              <button class="model-tab active" onclick="selectModel('Random Forest')" data-model="Random Forest">🌲
+                R.Forest</button>
+              <button class="model-tab" onclick="selectModel('XGBoost')" data-model="XGBoost">⚡ XGBoost</button>
+              <button class="model-tab" onclick="selectModel('LightGBM')" data-model="LightGBM">💡 LGBM</button>
+            </div>
+            <div class="model-info-box" id="modelInfoBox">
+              <p class="model-desc" id="modelDesc">Ensemble của nhiều cây quyết định. Mạnh mẽ và ổn định.</p>
+              <div class="model-pros-cons">
+                <div class="pros" id="modelPros">
+                  <b>✅ Ưu điểm</b><br>
+                  • Reduces overfitting vs single tree<br>• Handles missing values<br>• Feature importance built-in
+                </div>
+                <div class="cons" id="modelCons">
+                  <b>⚠️ Nhược điểm</b><br>
+                  • Slower than single tree<br>• Less interpretable<br>• Higher memory usage
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="summary-card" id="inputSummary">
+            <h3>📋 Tóm Tắt Input</h3>
+            <table class="summary-table" id="summaryTable">
+              <tr>
+                <td>Diện tích</td>
+                <td><b id="s-area">80 m²</b></td>
+              </tr>
+              <tr>
+                <td>Phòng ngủ</td>
+                <td><b id="s-bed">3</b></td>
+              </tr>
+              <tr>
+                <td>Phòng tắm</td>
+                <td><b id="s-bath">2</b></td>
+              </tr>
+              <tr>
+                <td>Số tầng</td>
+                <td><b id="s-floor">2</b></td>
+              </tr>
+              <tr>
+                <td>Tỉnh/TP</td>
+                <td><b id="s-prov">Hồ Chí Minh</b></td>
+              </tr>
+              <tr>
+                <td>Phường/Xã</td>
+                <td><b id="s-dist">Dĩ An</b></td>
+              </tr>
+              <tr>
+                <td>Pháp lý</td>
+                <td><b id="s-legal">Sổ đỏ</b></td>
+              </tr>
+              <tr>
+                <td>Nội thất</td>
+                <td><b id="s-furn">Đầy đủ</b></td>
+              </tr>
+              <tr>
+                <td>Hướng nhà</td>
+                <td><b id="s-dir">Đông Nam</b></td>
+              </tr>
+            </table>
+          </div>
+
+          <button class="predict-btn" id="predictBtn" onclick="predict()">
+            🔮 Dự Đoán Giá Ngay
+          </button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="prediction-result" id="predictionResult" style="display:none"></div>
+
+      <!-- SHAP explanation -->
+      <div class="shap-section" id="shapSection" style="display:none">
+        <h3>🔍 Giải Thích AI (SHAP Analysis)</h3>
+        <p class="shap-subtitle">Mức độ ảnh hưởng của từng yếu tố đến giá dự đoán</p>
+        <div class="shap-chart-wrapper">
+          <canvas id="shapChart"></canvas>
+        </div>
+        <div class="shap-insights" id="shapInsights"></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ EDA PAGE ═══════════════ -->
+    <div id="page-eda" class="page">
+      <h1 class="page-title">📈 Phân Tích Dữ Liệu (EDA)</h1>
+      <p class="page-subtitle">Khám phá phân phối, xu hướng và mối quan hệ trong tập dữ liệu bất động sản Việt Nam.</p>
+
+      <div class="kpi-grid" style="margin-bottom:2rem">
+        <div class="kpi-card">
+          <div class="kpi-icon">📦</div>
+          <div class="kpi-value" id="eda-n">30.194</div>
+          <div class="kpi-label">Tổng quan sát</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">💰</div>
+          <div class="kpi-value" id="eda-price">5,87 Tỷ</div>
+          <div class="kpi-label">Giá trung bình</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">📐</div>
+          <div class="kpi-value" id="eda-area">68,1 m²</div>
+          <div class="kpi-label">DT trung bình</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">🗺️</div>
+          <div class="kpi-value" id="eda-prov">23</div>
+          <div class="kpi-label">Tỉnh / TP (có dữ liệu)</div>
+        </div>
+      </div>
+
+      <!-- Filter -->
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label>🗺️ Tỉnh/TP:</label>
+          <select id="edaProvFilter" class="form-select" onchange="updateEDACharts()">
+            <option value="all">Tất cả</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>💰 Khoảng giá (Tỷ VND): <span id="priceRangeVal">0 – 50</span></label>
+          <input type="range" id="priceMax" min="1" max="50" value="50" oninput="updatePriceFilter()" />
+        </div>
+      </div>
+
+      <div class="chart-card chart-card--fullwidth">
+        <h4>🗺️ Giá Trung Bình Theo Tỉnh/TP</h4>
+        <div class="prov-chart-wrapper">
+          <canvas id="provChart"></canvas>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h4>📊 Phân Phối Giá Nhà</h4>
+          <canvas id="histChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>🛏️ Số Phòng Ngủ vs Giá TB</h4>
+          <canvas id="bedroomChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>📄 Giá Theo Tình Trạng Pháp Lý</h4>
+          <canvas id="legalChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>🛋️ Giá Theo Nội Thất</h4>
+          <canvas id="furnitureChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>🧭 Giá Theo Hướng Nhà</h4>
+          <canvas id="directionChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-top:1.5rem">
+        <h4>🔥 Tương Quan Giữa Các Biến Số</h4>
+        <canvas id="correlationChart" style="max-height:320px"></canvas>
+      </div>
+    </div>
+
+    <!-- ═══════════════ COMPARISON PAGE ═══════════════ -->
+    <div id="page-comparison" class="page">
+      <h1 class="page-title">📊 So Sánh Mô Hình</h1>
+      <p class="page-subtitle">So sánh hiệu suất 5 thuật toán ML dựa trên các độ đo đánh giá tiêu chuẩn.</p>
+
+      <!-- Best model banner -->
+      <div class="best-model-banner">
+        <div class="best-icon">🏆</div>
+        <div>
+          <div class="best-title" id="best-model-name">Mô Hình Tốt Nhất: LightGBM</div>
+          <div class="best-stats" id="best-model-stats">
+            RMSE: 1.301 &nbsp;|&nbsp; MAE: 0.975 &nbsp;|&nbsp; R²: 0.648 &nbsp;|&nbsp; MAPE: 20.1%
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics Table -->
+      <h2 class="section-title" style="margin-top:2rem">📋 Bảng Hiệu Suất Chi Tiết</h2>
+      <div class="table-wrapper">
+        <table class="metrics-table" id="metricsTable">
+          <thead>
+            <tr>
+              <th>Xếp Hạng</th>
+              <th>Mô Hình</th>
+              <th>MAE (Tỷ VND)</th>
+              <th>RMSE (Tỷ VND)</th>
+              <th>R² Score</th>
+              <th>MAPE (%)</th>
+            </tr>
+          </thead>
+          <tbody id="metricsBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Charts tabs -->
+      <h2 class="section-title" style="margin-top:2.5rem">📈 So Sánh Biểu Đồ</h2>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('rmse')" id="tab-rmse">RMSE</button>
+        <button class="tab-btn" onclick="switchTab('mae')" id="tab-mae">MAE</button>
+        <button class="tab-btn" onclick="switchTab('r2')" id="tab-r2">R² Score</button>
+        <button class="tab-btn" onclick="switchTab('mape')" id="tab-mape">MAPE</button>
+      </div>
+
+      <div class="chart-card" style="margin-top:1rem">
+        <canvas id="comparisonBarChart"></canvas>
+      </div>
+
+      <!-- Radar chart -->
+      <h2 class="section-title" style="margin-top:2.5rem">🕸️ So Sánh Tổng Quan (Radar)</h2>
+      <div class="chart-card">
+        <canvas id="radarChart" style="max-height:420px"></canvas>
+      </div>
+
+      <!-- Model detail cards -->
+      <h2 class="section-title" style="margin-top:2.5rem">🤖 Chi Tiết Các Mô Hình</h2>
+      <div class="model-detail-grid" id="modelDetailGrid"></div>
+    </div>
+
+  </main>
+
+  <script src="vn-geo.js?v=20260615"></script>
+  <script src="app.js?v=20260615i"></script>
+</body>
+
+</html>

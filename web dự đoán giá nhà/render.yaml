@@ -1,0 +1,9 @@
+# Cấu hình deploy Render.com (Blueprint). Vào Render → New → Blueprint → chọn repo.
+services:
+  - type: web
+    name: houseai-vietnam
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python api.py
+    # Render tự đặt biến PORT; api.py đã đọc PORT nên không cần khai báo thêm.
